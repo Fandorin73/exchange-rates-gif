@@ -1,0 +1,11 @@
+server.port:
+  8080
+currency.api_key:
+  ${CUR_KEY:de45cff15cbd443db3fa4f320daaa58a}
+currency.url:
+  ${CUR_URL:https://openexchangerates.org/api/historical}
+gif.api_key:
+  ${GIF_KEY:m2Eg3zcl6jzuEh1EE6kc39rpWNVyGt29}
+gif.url:
+  ${GIF_URL:https://api.giphy.com/v1/gifs}
+

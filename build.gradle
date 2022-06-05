@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.7.0'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'checkstyle'
 }
 
 group = 'com.alfabank'
@@ -23,11 +24,17 @@ ext {
 }
 
 dependencies {
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.12'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+checkstyle {
+    toolVersion = '8.29'
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
 
 dependencyManagement {
@@ -38,4 +45,14 @@ dependencyManagement {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+task Checkstyle(type: Checkstyle) {
+    source 'src/main/java'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/R.java'
+    exclude '**/BuildConfig.java'
+
+    // empty classpath
+    classpath = rootProject.files()
 }
